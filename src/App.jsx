@@ -45,10 +45,10 @@ function App() {
   };
 
   return (
-    <div>
+    <div className='container'>
       <h1>Counters</h1>
       Total {counters.reduce((acc, cur) => acc + cur.value, 0)}
-      <button onClick={resetTotalCount}>Reset total count</button>
+      <button onClick={resetTotalCount} className='btn btn-warning'>Reset total count</button>
       <hr/>
       {counters.map(el => <Counter
           key={el.id}
