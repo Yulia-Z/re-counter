@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Counter from "./Counter";
 import AddCounterForm from "./AddCounterForm";
+import TotalCounter from "./TotalCounter";
 
 function App() {
 
@@ -47,8 +48,7 @@ function App() {
   return (
     <div className='container'>
       <h1>Counters</h1>
-      Total {counters.reduce((acc, cur) => acc + cur.value, 0)}
-      <button onClick={resetTotalCount} className='btn btn-warning'>Reset total count</button>
+      <TotalCounter counters={counters} reset={resetTotalCount}/>
       <hr/>
       {counters.map(el => <Counter
           key={el.id}
