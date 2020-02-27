@@ -3,6 +3,7 @@ import './App.css';
 import Counter from "./Counter";
 import AddCounterForm from "./AddCounterForm";
 import TotalCounter from "./TotalCounter";
+import DeleteConfirmationModal from "./DeleteConfirmationModal";
 
 function App() {
 
@@ -57,7 +58,6 @@ function App() {
           value={el.value}
           increment={incrementCounter}
           decrement={decrementCounter}
-          removeCounter={removeCounter}
       />)}
       <hr/>
       <AddCounterForm submit={addCounter}/>
