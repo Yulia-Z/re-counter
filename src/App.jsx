@@ -5,6 +5,7 @@ import AddCounterForm from "./AddCounterForm";
 import TotalCounter from "./TotalCounter";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 
+
 function App() {
 
   const initialCounters = [
@@ -30,10 +31,10 @@ function App() {
     const newCounters = counters.map(el => el.id === id ? ({...el, value: el.value - 1}) : el);
     setCounters(newCounters);
   };
-  const removeCounter = (id) => {
-    console.log('rem' + id);
-    const newCounters = counters.filter(el => el.id !== id);
+  const removeCounter = () => {
+    const newCounters = counters.filter(el => el.id !== counterForDeleteConfirmation.id);
     setCounters(newCounters);
+    setCounterForDeleteConfirmation({});
   };
 
   const addCounter = (name, count) => {
@@ -46,6 +47,16 @@ function App() {
     setCounters(newCounters);
   };
 
+  const [counterForDeleteConfirmation, setCounterForDeleteConfirmation] = useState({});
+
+  const openConfirmationModal = (el) => {
+    setCounterForDeleteConfirmation(el);
+  };
+
+  const confirmDeleteCancel = () => {
+    setCounterForDeleteConfirmation({});
+  };
+
   return (
     <div className='container'>
       <h1>Counters</h1>
@@ -53,14 +64,17 @@ function App() {
       <hr/>
       {counters.map(el => <Counter
           key={el.id}
-          id={el.id}
-          name={el.name}
-          value={el.value}
+          counterData={el}
           increment={incrementCounter}
           decrement={decrementCounter}
+          removeConfirmation={openConfirmationModal}
       />)}
       <hr/>
       <AddCounterForm submit={addCounter}/>
+      <DeleteConfirmationModal counterName={counterForDeleteConfirmation.name}
+                               onSuccess={removeCounter}
+                               onCancel={confirmDeleteCancel}
+      />
     </div>
   );
 }
